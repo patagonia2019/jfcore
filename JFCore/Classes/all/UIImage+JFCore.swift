@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 extension UIImage {
 
     public func resizeImageWithSize(size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
-        self.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -26,39 +28,37 @@ extension UIImage {
         size.width = hw
         size.height = hw
         let gray = self.convertToGrayScale()
-        if let bg = gray.resizeImageWithSize(size) {
+        if let bg = gray.resizeImageWithSize(size: size) {
             let pattern = UIColor.init(patternImage: bg)
             return pattern
         }
-        return UIColor.blackColor()
+        return UIColor.black
     }
     
     public func convertToGrayScale() -> UIImage {
-        let image = self
-        let imageRect:CGRect = CGRectMake(0, 0, image.size.width, image.size.height)
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray()
-        let width = image.size.width
-        let height = image.size.height
+        let width = self.size.width
+        let height = self.size.height
         
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.None.rawValue)
-        let context = CGBitmapContextCreate(nil, Int(width), Int(height), 8, 0, colorSpace, bitmapInfo.rawValue)
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
+        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
         
-        CGContextDrawImage(context!, imageRect, image.CGImage!)
-        let imageRef = CGBitmapContextCreateImage(context!)
-        let newImage = UIImage(CGImage: imageRef!)
+        context?.draw(self.cgImage!, in: rect)
+        let imageRef = context!.makeImage()
+        let newImage = UIImage(cgImage: imageRef!)
         
         return newImage
     }
     
     public func convertColor(color: UIColor) -> UIImage {
-        let image = self
-        let rect:CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: image.size.width, height: image.size.height))
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, image.scale)
-        let c:CGContextRef = UIGraphicsGetCurrentContext()!
-        image.drawInRect(rect)
-        CGContextSetFillColorWithColor(c, color.CGColor)
-        CGContextSetBlendMode(c, .SourceAtop)
-        CGContextFillRect(c, rect)
+        let rect:CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.size.width, height: self.size.height))
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, self.scale)
+        let c:CGContext = UIGraphicsGetCurrentContext()!
+        self.draw(in: rect)
+        c.setFillColor(color.cgColor)
+        c.setBlendMode(.sourceAtop)
+        c.fill(rect)
         let result:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return result

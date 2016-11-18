@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 public extension NSObject {
     
     struct Constants {
@@ -53,85 +54,85 @@ public extension NSObject {
     /// Accessibility header trait
     /// Receives a string and optional hint
     public func setAccessHeader(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.label, trait: UIAccessibilityTraitHeader, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.label, trait: UIAccessibilityTraitHeader, hint: hint)
     }
     
     /// Accessibility header trait
     /// Receives only the string
     public func setAccessHeader(string: String) {
-        setAccessHeader(string, hint: nil)
+        setAccessHeader(string: string, hint: nil)
     }
     
     /// Accessibility image trait
     /// Receives a string and optional hint
     public func setAccessImage(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.image, trait: UIAccessibilityTraitImage, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.image, trait: UIAccessibilityTraitImage, hint: hint)
     }
     
     /// Accessibility image trait
     /// Receives only the string
     public func setAccessImage(string: String) {
-        setAccessImage(string, hint: nil)
+        setAccessImage(string: string, hint: nil)
     }
     
     /// Accessibility button trait
     /// Receives a string and optional hint
     public func setAccessButton(string: String, hint: String?)  {
-        setAccessWithLabel(string, labelComment: Constants.comment.image, trait: UIAccessibilityTraitButton, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.image, trait: UIAccessibilityTraitButton, hint: hint)
     }
     
     /// Accessibility button trait
     /// Receives only the string
     public func setAccessButton(string: String) {
-        setAccessButton(string, hint: nil)
+        setAccessButton(string: string, hint: nil)
     }
     
     /// Accessibility label trait
     /// Receives a string and optional hint
     public func setAccessLabel(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.label, trait: UIAccessibilityTraitStaticText, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.label, trait: UIAccessibilityTraitStaticText, hint: hint)
     }
     
     /// Accessibility label trait
     /// Receives only the string
     public func setAccessLabel(string: String) {
-        setAccessLabel(string, hint: nil)
+        setAccessLabel(string: string, hint: nil)
     }
 
     /// Accessibility link trait
     /// Receives a string and optional hint
     public func setAccessLink(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.link, trait: UIAccessibilityTraitLink, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.link, trait: UIAccessibilityTraitLink, hint: hint)
     }
     
     /// Accessibility label trait
     /// Receives only the string
     public func setAccessLink(string: String) {
-        setAccessLabel(string, hint: nil)
+        setAccessLabel(string: string, hint: nil)
     }
     
     /// Accessibility search trait
     /// Receives a string and optional hint
     public func setAccessSearch(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.search, trait: UIAccessibilityTraitSearchField, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.search, trait: UIAccessibilityTraitSearchField, hint: hint)
     }
     
     /// Accessibility search trait
     /// Receives only the string
     public func setAccessSearch(string: String) {
-        setAccessLabel(string, hint: nil)
+        setAccessLabel(string: string, hint: nil)
     }
     
     /// Accessibility media trait (video, stream)
     /// Receives a string and optional hint
     public func setAccessVideo(string: String, hint: String?) {
-        setAccessWithLabel(string, labelComment: Constants.comment.media, trait: UIAccessibilityTraitStartsMediaSession, hint: hint)
+        setAccessWithLabel(labelString: string, labelComment: Constants.comment.media, trait: UIAccessibilityTraitStartsMediaSession, hint: hint)
     }
     
     /// Accessibility media trait
     /// Receives only the string
     public func setAccessVideo(string: String) {
-        setAccessLabel(string, hint: nil)
+        setAccessLabel(string: string, hint: nil)
     }
     
 }
@@ -142,7 +143,7 @@ public extension UILabel {
     /// Uses what is in text
     public func setAccessLabel() {
         if let text = self.text {
-            setAccessLabel(text, hint: nil)
+            setAccessLabel(string: text, hint: nil)
         }
     }
 }

@@ -8,26 +8,26 @@
 
 import Foundation
 
-public class Error : ErrorType {
+public class JFError : Error {
     
     public var error: NSError?
     
     public init(code: Int, desc: String?, reason: String?, suggestion: String?, underError error: NSError?) {
         var dict = [String: AnyObject]()
         if let adesc = desc {
-            dict[NSLocalizedDescriptionKey] = adesc
+            dict[NSLocalizedDescriptionKey] = adesc as AnyObject?
         }
         if let areason = reason {
-            dict[NSLocalizedFailureReasonErrorKey] = areason
+            dict[NSLocalizedFailureReasonErrorKey] = areason as AnyObject?
         }
         
         if let asuggestion = suggestion {
-            dict[NSLocalizedRecoverySuggestionErrorKey] = asuggestion
+            dict[NSLocalizedRecoverySuggestionErrorKey] = asuggestion as AnyObject?
         }
         if let aerror = error {
             dict[NSUnderlyingErrorKey] = aerror
         }
-        self.error = NSError(domain: NSBundle.mainBundle().bundleIdentifier!, code:code, userInfo: dict)
+        self.error = NSError(domain: Bundle.main.bundleIdentifier!, code:code, userInfo: dict)
     }
     
     public init(_ error: NSError?) {
@@ -52,11 +52,11 @@ public class Error : ErrorType {
     
     public func asDictionary() -> [String : AnyObject]? {
         if let error = self.error {
-            return ["code": error.code,
-                    NSLocalizedDescriptionKey: error.localizedDescription,
-                    NSLocalizedFailureReasonErrorKey: error.localizedFailureReason ?? "",
-                    NSLocalizedRecoverySuggestionErrorKey: error.localizedRecoverySuggestion ?? "",
-                    NSUnderlyingErrorKey: "\(error.userInfo)"]
+            return ["code": error.code as AnyObject,
+                    NSLocalizedDescriptionKey: error.localizedDescription as AnyObject,
+                    NSLocalizedFailureReasonErrorKey: (error.localizedFailureReason ?? "") as AnyObject,
+                    NSLocalizedRecoverySuggestionErrorKey: (error.localizedRecoverySuggestion ?? "") as AnyObject,
+                    NSUnderlyingErrorKey: "\(error.userInfo)" as AnyObject]
         }
         return nil
     }

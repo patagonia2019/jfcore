@@ -48,7 +48,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = JFCore.Constants.minimumDistanceFilterInMeters
+//        locationManager.distanceFilter = JFCore.Constants.minimumDistanceFilterInMeters
         locationManager.delegate = self
     }
     
@@ -77,54 +77,66 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     
-    public func reverseLocation(location: CLLocation, didFailWithError:(error: Error) -> Void,
-                                didUpdatePlacemarks:(placemarks: [CLPlacemark]) -> Void) {
+    public func reverseLocation(location: CLLocation, didFailWithError:@escaping (_ error: JFError) -> Void,
+                                didUpdatePlacemarks:@escaping (_ placemarks: [CLPlacemark]) -> Void) {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) -> Void in
             if let myerror = error {
-                didFailWithError(error: Error(myerror))
+                didFailWithError(JFError(myerror as NSError?))
             }
             else if let myplacemarks = placemarks {
-                didUpdatePlacemarks(placemarks: myplacemarks)
+                didUpdatePlacemarks(myplacemarks)
             }
             else {
-                let myerror = Error(code: JFCore.Constants.ErrorCode.LocMgrNoPlaceMarksFound.rawValue,
+                let myerror = JFError(code: JFCore.Constants.ErrorCode.LocMgrNoPlaceMarksFound.rawValue,
                                     desc: "Failed at rever geocode",
                                     reason: "Reverse Location failed on get the placements for the given location",
-                                    suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error)
+                                    suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError?)
 
-                didFailWithError(error: myerror)
+                didFailWithError(myerror)
             }
         }
     }
     
-    @objc public func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-    {
-        let e = Error(code: JFCore.Constants.ErrorCode.LocMgrNoLocationsDetected.rawValue, desc: "CLLocationManager failed",
-                      reason: "When trying to get the location",
-                      suggestion: "\(#file):\(#line):\(#column):\(#function)",
-                      underError: error as NSError)
-        if self.isRunning() {
-            self.stop()
-            NSNotificationCenter.defaultCenter().postNotificationName(JFCore.Constants.Notification.locationError, object: e)
-        }
-    }
-
     public func notifyName(aName: String, object anObject: AnyObject?) {
         if self.isRunning() {
-            NSNotificationCenter.defaultCenter().postNotificationName(aName, object: anObject)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: aName), object: anObject)
         }
+    }
+    
+    
+    public func isAuthorized() -> Bool {
+        return CLLocationManager.authorizationStatus() == .authorizedAlways ||
+            CLLocationManager.authorizationStatus() == .authorizedWhenInUse
+    }
+    
+    private func notifyChanges(locations : [CLLocation]) {
+        self.locations = locations
+        self.notifyName(aName: JFCore.Constants.Notification.locationUpdated, object: nil)
     }
     
     //
     // Delegate rules
     //
-    @objc public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        let e = JFError(code: JFCore.Constants.ErrorCode.LocMgrNoLocationsDetected.rawValue, desc: "CLLocationManager failed",
+                        reason: "When trying to get the location",
+                        suggestion: "\(#file):\(#line):\(#column):\(#function)",
+            underError: error as NSError)
+        if self.isRunning() {
+            self.stop()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: e)
+        }
+    }
+    
+
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         var notifyChange = true
         
         guard let currentLocations = self.locations else {
             // No current locations, just notify the new loctions updated
-            self.notifyChanges(locations)
+            self.notifyChanges(locations: locations)
             return
         }
         
@@ -143,27 +155,17 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
             }
             
             if (notifyChange) {
-                self.notifyChanges(locations)
+                self.notifyChanges(locations: locations)
             }
         }
     }
     
-    private func notifyChanges(locations : [CLLocation]) {
-        self.locations = locations
-        self.notifyName(JFCore.Constants.Notification.locationUpdated, object: nil)
-    }
-    
-    @objc public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
-        if (status == .AuthorizedAlways || status == .AuthorizedWhenInUse) {
-            self.notifyName(JFCore.Constants.Notification.locationAuthorized, object: nil)
+        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
+            self.notifyName(aName: JFCore.Constants.Notification.locationAuthorized, object: nil)
         }
     }
     
-    public func isAuthorized() -> Bool {
-        return CLLocationManager.authorizationStatus() == .AuthorizedAlways ||
-               CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse
-    }
-
 
 }

@@ -12,17 +12,17 @@ import UIKit
 public class Common {
 
     public static var app : String = {
-        guard let info = NSBundle.mainBundle().infoDictionary,
+        guard let info = Bundle.main.infoDictionary,
             let bundleName = info["CFBundleName"] as? String else {
                 return ""
         }
         return bundleName
     }()
 
-    public class func synchronized(syncBlock:() -> Void) {
+    public class func synchronized(syncBlock:@escaping () -> Void) {
         objc_sync_enter(self)
-        let lockQueue = dispatch_queue_create(NSBundle.mainBundle().bundleIdentifier!, nil)
-        dispatch_sync(lockQueue) {
+        let concurrentQueue = DispatchQueue(label: Bundle.main.bundleIdentifier!, attributes: .concurrent)
+        concurrentQueue.sync {
             syncBlock()
         }
         objc_sync_exit(self)

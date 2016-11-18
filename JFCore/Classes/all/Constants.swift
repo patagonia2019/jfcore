@@ -10,7 +10,7 @@ import Foundation
 
 public struct Constants {
     
-    static let app : String = NSBundle.mainBundle().bundleIdentifier!.componentsSeparatedByString(".").last!
+//    static let app : String = Bundle.mainBundle().bundleIdentifier!.componentsSeparatedByString(".").last!
 
     struct CoreData {
         static let extensionFile = "momd"

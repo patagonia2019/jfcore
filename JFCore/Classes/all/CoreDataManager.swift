@@ -21,72 +21,69 @@ public class CoreDataManager {
          This property is not optional. It is a fatal error for the application
          not to be able to find and load its model.
          */
-        let bundleName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
+        let bundleName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
 
-        let modelURL = NSBundle.mainBundle().URLForResource(bundleName, withExtension: Constants.CoreData.extensionFile)!
+        let modelURL = Bundle.main.url(forResource: bundleName, withExtension: JFCore.Constants.CoreData.extensionFile)!
         
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     /// The directory the application uses to store the Core Data store file.
     lazy var applicationSupportDirectory: NSURL = {
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        let urls = fileManager.URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
+        let urls = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         
         let applicationSupportDirectoryURL = urls.last!
         
-        let bundleID = NSBundle.mainBundle().bundleIdentifier
+        let bundleID = Bundle.main.bundleIdentifier
 
-        let applicationSupportDirectory = applicationSupportDirectoryURL.URLByAppendingPathComponent(bundleID!)
-        
-        do {
-            let properties = try applicationSupportDirectory!.resourceValuesForKeys([NSURLIsDirectoryKey])
-            if let isDirectory = properties[NSURLIsDirectoryKey] as? Bool where isDirectory == false {
+        let applicationSupportDirectory = applicationSupportDirectoryURL.appendingPathComponent(bundleID!)
+        var isDir : ObjCBool = false
+        if fileManager.fileExists(atPath: applicationSupportDirectory.absoluteString, isDirectory:&isDir) {
+            if isDir.boolValue == false {
                 let description = NSLocalizedString("Could not access the application data folder.",
                                                     comment: "Failed to initialize applicationSupportDirectory.")
                 
                 let reason = NSLocalizedString("Found a file in its place.",
                                                comment: "Failed to initialize applicationSupportDirectory.")
                 
-                let bundleID = NSBundle.mainBundle().bundleIdentifier
-
-                let myerror = Error(code: Constants.ErrorCode.CDApplicationDirectoryMissing.rawValue, desc: description,
+                let myerror = JFError(code: JFCore.Constants.ErrorCode.CDApplicationDirectoryMissing.rawValue, desc: description,
                                     reason: reason, suggestion: "\(#file):\(#line):\(#column):\(#function)",
-                                    underError: nil)
-
+                    underError: nil)
+                
                 myerror.fatal()
             }
-        }
-        catch let error as NSError where error.code != NSFileReadNoSuchFileError {
-            let e = Error(code: NSFileReadNoSuchFileError, desc: "could not read file",
-                          reason: "no such file", suggestion: "\(#file):\(#line):\(#column):\(#function)",
-                          underError: error)
-            e.fatal()
-        }
-        catch {
-            let path = applicationSupportDirectory!.path!
-            
-            do {
-                try fileManager.createDirectoryAtPath(path, withIntermediateDirectories:true, attributes:nil)
-            }
-            catch {
-                let e = Error(code: NSFileReadNoSuchFileError,
-                              desc: "Could not create application documents directory at \(path).",
-                              reason: "some permissions issues",
-                              suggestion: "\(#file):\(#line):\(#column):\(#function)",
-                              underError: error as NSError)
+            else {
+                let e = JFError(code: NSFileReadNoSuchFileError, desc: "could not read file",
+                              reason: "no such file", suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: nil)
                 e.fatal()
             }
         }
+        else {
+            let path = applicationSupportDirectory.path
+            
+            do {
+                try fileManager.createDirectory(atPath: path, withIntermediateDirectories:true, attributes:nil)
+            }
+            catch {
+                let e = JFError(code: NSFileReadNoSuchFileError,
+                              desc: "Could not create application documents directory at \(path).",
+                    reason: "some permissions issues",
+                    suggestion: "\(#file):\(#line):\(#column):\(#function)",
+                    underError: error as NSError)
+                e.fatal()
+            }
+
+        }
         
-        return applicationSupportDirectory!
+        return applicationSupportDirectory as NSURL
     }()
     
     /// URL for the main Core Data store file.
     lazy var storeURL: NSURL = {
-        let bundleID = NSBundle.mainBundle().bundleIdentifier
-        return self.applicationSupportDirectory.URLByAppendingPathComponent(bundleID!)!
+        let bundleID = Bundle.main.bundleIdentifier
+        return self.applicationSupportDirectory.appendingPathComponent(bundleID!)! as NSURL
     }()
     
     
@@ -105,12 +102,12 @@ public class CoreDataManager {
             NSInferMappingModelAutomaticallyOption: true
         ]
         
-        try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil,
-                                                                  URL: self.storeURL, options: options)
+        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil,
+                                           at: self.storeURL as URL, options: options)
     
-        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         
-        context.performBlockAndWait() {
+        context.performAndWait() {
             
             context.persistentStoreCoordinator = coordinator
             
@@ -138,7 +135,7 @@ public class CoreDataManager {
             _taskContext = try self.createPrivateQueueContext()
         } catch {
             // Report any error we got.
-            let e = Error(code: Constants.ErrorCode.CDCreatePrivateQueueContext.rawValue,
+            let e = JFError(code: JFCore.Constants.ErrorCode.CDCreatePrivateQueueContext.rawValue,
                           desc: "Could not process taksContext data",
                           reason: "Failed to initialize the application's saved data",
                           suggestion: "\(#file):\(#line):\(#column):\(#function)",

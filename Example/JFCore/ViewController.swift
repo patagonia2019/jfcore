@@ -23,25 +23,25 @@ class ViewController: BaseViewController {
         super.viewDidLoad()
 
         if let image = UIImage.init(named: "background") {
-            self.view.backgroundColor = image.patternColor(UIScreen.mainScreen().bounds.size)
+            self.view.backgroundColor = image.patternColor(customSize: UIScreen.main.bounds.size)
         }
         self.logCurrentLanguage()
         
-        self.navigationItem.setAccessHeader("This is the header")
+        self.navigationItem.setAccessHeader(string: "This is the header")
         
         self.label.setAccessLabel()
         self.placemark.setAccessLabel()
-        self.button.setAccessButton("This is the button")
-        self.image.setAccessImage("This is the image")
+        self.button.setAccessButton(string: "This is the button")
+        self.image.setAccessImage(string: "This is the image")
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.observeLocationServices()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.unobserveLocationServices()
     }
@@ -49,20 +49,20 @@ class ViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
 
-    private func observeLocationServices()
+    fileprivate func observeLocationServices()
     {
         self.unobserveLocationServices()
         
-        let queue = NSOperationQueue.mainQueue()
-        NSNotificationCenter.defaultCenter()
-            .addObserverForName(JFCore.Constants.Notification.locationUpdated, object: nil, queue: queue) {
+        let queue = OperationQueue.main
+        NotificationCenter.default
+            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: queue) {
                 [weak self] (NSNotification) in
                 guard let locs = LocationManager.instance.locations,
-                    f = locs.first,
-                    strong = self else {
+                    let f = locs.first,
+                    let strong = self else {
                         return
                 }
                 strong.label.text = strong.locationDescription(f)
@@ -71,8 +71,8 @@ class ViewController: BaseViewController {
                 strong.reverseLocation(f)
         }
         
-        NSNotificationCenter.defaultCenter()
-            .addObserverForName(JFCore.Constants.Notification.locationError, object: nil, queue: queue) {
+        NotificationCenter.default
+            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil, queue: queue) {
                 [weak self]
                 note in
                 if let _: Error = note.object as? Error,
@@ -81,8 +81,8 @@ class ViewController: BaseViewController {
                 }
         }
         
-        NSNotificationCenter.defaultCenter()
-            .addObserverForName(JFCore.Constants.Notification.locationAuthorized, object: nil, queue: queue) {
+        NotificationCenter.default
+            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationAuthorized), object: nil, queue: queue) {
                 (NSNotification) in
                 if !JFCore.LocationManager.instance.isAuthorized() {
                     // do nothing
@@ -90,7 +90,7 @@ class ViewController: BaseViewController {
         }
     }
     
-    func locationTitle(location : CLLocation) -> String {
+    func locationTitle(_ location : CLLocation) -> String {
         var aux : String = "["
         aux += "\(location.coordinate.latitude);"
         aux += "\(location.coordinate.longitude)"
@@ -98,7 +98,7 @@ class ViewController: BaseViewController {
         return aux
     }
 
-    func locationDescription(location : CLLocation) -> String {
+    func locationDescription(_ location : CLLocation) -> String {
         var level : Int = 0
         if let floor = location.floor {
             level = floor.level
@@ -115,7 +115,7 @@ class ViewController: BaseViewController {
     }
     
     
-    func placemarkDescription(placemark : CLPlacemark) -> String {
+    func placemarkDescription(_ placemark : CLPlacemark) -> String {
         
         var aux : String = "["
         if let _administrativeArea = placemark.administrativeArea {
@@ -130,7 +130,7 @@ class ViewController: BaseViewController {
         if let _inlandWater = placemark.inlandWater {
             aux += "\(_inlandWater);"
         } else { aux += "();" }
-        if let _isoCountryCode = placemark.ISOcountryCode {
+        if let _isoCountryCode = placemark.isoCountryCode {
             aux += "\(_isoCountryCode);"
         } else { aux += "();" }
         if let _locality = placemark.locality {
@@ -165,63 +165,57 @@ class ViewController: BaseViewController {
     }
 
     
-    private func locationRestart() {
-        JFCore.Common.synchronized({
+    fileprivate func locationRestart() {
+        JFCore.Common.synchronized(syncBlock: {
             LocationManager.instance.stop()
             LocationManager.instance.start()
         })
     }
     
-    private func unobserveLocationServices()
+    fileprivate func unobserveLocationServices()
     {
         for notification in [JFCore.Constants.Notification.locationUpdated,
                              JFCore.Constants.Notification.locationError,
                              JFCore.Constants.Notification.locationAuthorized] {
-                                NSNotificationCenter.defaultCenter().removeObserver(self, name: notification, object: nil);
+                                NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
         }
     }
     
-    private func logCurrentLanguage()
+    fileprivate func logCurrentLanguage()
     {
-        if let locale : NSLocale = NSLocale.currentLocale() {
-            for key in [NSLocaleIdentifier, NSLocaleLanguageCode, NSLocaleCountryCode, NSLocaleScriptCode, NSLocaleVariantCode, NSLocaleUsesMetricSystem, NSLocaleMeasurementSystem, NSLocaleDecimalSeparator] {
-                if let name = locale.objectForKey(key) {
-                    Analytics.logFunction(#function, parameters: [key : String(name)])
-                }
+        let locale = Locale.current
+        for key in [NSLocale.Key.identifier, NSLocale.Key.languageCode, NSLocale.Key.countryCode, NSLocale.Key.scriptCode, NSLocale.Key.variantCode, NSLocale.Key.usesMetricSystem, NSLocale.Key.measurementSystem, NSLocale.Key.decimalSeparator] {
+            if let name = (locale as NSLocale).object(forKey: key) {
+                Analytics.logFunction(function: #function, parameters: [key.rawValue : name as AnyObject])
             }
-            if let calendar = locale.objectForKey(NSLocaleCalendar) as? NSCalendar {
-                Analytics.logFunction(#function, parameters: [NSLocaleCalendar : calendar.calendarIdentifier])
-            }
+        }
+        if let calendar = (locale as NSLocale).object(forKey: NSLocale.Key.calendar) as? Calendar {
+            Analytics.logFunction(function: #function, parameters: [NSLocale.Key.calendar.rawValue : calendar.identifier as AnyObject])
         }
     }
 
     
-    func reverseLocation(location : CLLocation) {
-                LocationManager.instance.reverseLocation(location,
-                    didFailWithError: { (error) in
-                        let myerror = Error(code: 10,
-                            desc: "Error on Placemarks",
-                            reason: "Error on Location/Placemarks import",
-                            suggestion: "\(#file):\(#line):\(#column):\(#function)", underError: error as NSError)
-                        Analytics.logFatal(myerror)
-                        myerror.fatal()
-                    },
-                    didUpdatePlacemarks: { [weak self] (placemarks) in
-                        guard let strong = self else { return }
-                        Analytics.logFunction(#function, parameters: ["location" : "\(placemarks.count)"])
-                        if let f = placemarks.first {
-                            strong.placemark.text = strong.placemarkDescription(f)
-                        }
-                        strong.placemark.setAccessLabel()
-                        strong.placemarks = placemarks
-                    })
+    func reverseLocation(_ location : CLLocation) {
+        
+        LocationManager.instance.reverseLocation(location: location, didFailWithError: { (jferror) in
+            Analytics.logFatal(error:jferror)
+            jferror.fatal()
+        }) { [weak self] (placemarks) in
+            guard let strong = self else { return }
+            Analytics.logFunction(function: #function, parameters: ["location" : "\(placemarks.count)" as AnyObject])
+            if let f = placemarks.first {
+                strong.placemark.text = strong.placemarkDescription(f)
+            }
+            strong.placemark.setAccessLabel()
+            strong.placemarks = placemarks
+        }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "list" {
-            let vc:ListViewController = segue.destinationViewController as! ListViewController
+            let vc:ListViewController = segue.destination as! ListViewController
             guard let ps = self.placemarks,
-                      l = self.location else {
+                      let l = self.location else {
                         return
             }
             vc.placemarks = ps

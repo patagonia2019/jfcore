@@ -21,20 +21,20 @@ class ListViewController: BaseTableViewController {
 
     // MARK: - Table View
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let p = placemarks {
             return p.count
         }
         return 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("okidoki", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "okidoki", for: indexPath as IndexPath)
         if let ps = placemarks,
             let tl = cell.textLabel,
             let dtl = cell.detailTextLabel {
             let p = ps[indexPath.row] as CLPlacemark
-            tl.font = UIFont.boldSystemFontOfSize(16)
+            tl.font = UIFont.boldSystemFont(ofSize: 16)
             tl.text = p.locality
             dtl.text = p.country
         }
@@ -44,7 +44,7 @@ class ListViewController: BaseTableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
     
 }

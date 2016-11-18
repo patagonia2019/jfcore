@@ -12,10 +12,10 @@ public class TitleView: UILabel {
     
     public init(appName: String,
          title: String?,
-         frame: CGRect = CGRectMake(0, 0, 100, 50),
-         font: UIFont = UIFont.boldSystemFontOfSize(20),
-         textColor: UIColor = UIColor.whiteColor(),
-         shadowColor: UIColor = UIColor.blackColor())
+         frame: CGRect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 100, height: 50)),
+         font: UIFont = UIFont.boldSystemFont(ofSize: 20),
+         textColor: UIColor = UIColor.white,
+         shadowColor: UIColor = UIColor.black)
     {
         super.init(frame: frame)
         self.font = font

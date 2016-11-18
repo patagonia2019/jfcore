@@ -8,18 +8,18 @@
 
 import UIKit
 
-public class BaseViewController: UIViewController {
+open class BaseViewController: UIViewController {
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = TitleView(appName: Common.app, title: self.title)
         self.title = ""
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        Analytics.logMemoryWarning(#function, line: #line)
+        Analytics.logMemoryWarning(function: #function, line: #line)
     }
 
 }
