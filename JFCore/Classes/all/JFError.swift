@@ -36,18 +36,19 @@ public class JFError : Error {
         }
     }
     
-    public func title() -> String? {
+    public func title() -> String {
         if let e = self.error {
             return e.localizedDescription
         }
-        return nil
+        return "No Title"
     }
     
-    public func reason() -> String? {
-        if let e = self.error {
-            return e.localizedFailureReason
+    public func reason() -> String {
+        if let e = self.error,
+           let reason = e.localizedFailureReason {
+            return reason
         }
-        return nil
+        return "No Reason"
     }
     
     public func asDictionary() -> [String : AnyObject]? {
