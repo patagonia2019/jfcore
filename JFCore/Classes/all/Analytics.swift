@@ -32,7 +32,7 @@ public class Analytics : NSObject {
     private func logEvent(event: String, parameters: [String : AnyObject]?) {
         if let sel = selector,
            let tgt = target {
-            tgt.perform(sel, with: event, with: parameters)
+            _ = tgt.perform(sel, with: event, with: parameters)
         }
     }
     

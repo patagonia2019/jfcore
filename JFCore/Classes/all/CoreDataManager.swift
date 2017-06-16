@@ -148,25 +148,21 @@ public class CoreDataManager {
     var _taskContext: NSManagedObjectContext? = nil
     
     public func save() {
-        if let mco: NSManagedObjectContext = self.taskContext
-        {
-            do {
-                try mco.save()
-            }
-            catch {
-                print("Error: \(error)\nCould not save Core Data context.")
-                return
-            }
-//            mco.reset()
+        let mco: NSManagedObjectContext = self.taskContext
+        do {
+            try mco.save()
         }
+        catch {
+            print("Error: \(error)\nCould not save Core Data context.")
+            return
+        }
+//            mco.reset()
     }
 
     public func rollback() {
-        if let mco: NSManagedObjectContext = self.taskContext
-        {
-            mco.rollback()
-            mco.reset()
-        }
+        let mco: NSManagedObjectContext = self.taskContext
+        mco.rollback()
+        mco.reset()
     }
 
 }

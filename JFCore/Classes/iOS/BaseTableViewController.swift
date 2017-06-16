@@ -13,7 +13,6 @@ open class BaseTableViewController: UITableViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()        
         self.navigationItem.titleView = TitleView(appName: Common.app, title: self.title)
-        self.title = ""
     }
     
     override open func didReceiveMemoryWarning() {
