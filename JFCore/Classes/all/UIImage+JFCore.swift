@@ -63,4 +63,40 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return result
     }
+    
+    public func mergeImages(topImage: UIImage) -> UIImage {
+        let bottomImage = self
+        
+        let size = CGSize(width: topImage.size.width, height: topImage.size.height + bottomImage.size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        topImage.draw(in: CGRect(x: 0,y: 0, width: size.width, height: topImage.size.height))
+        bottomImage.draw(in: CGRect(x: 0, y: topImage.size.height, width: size.width, height: bottomImage.size.height))
+        
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        
+        return newImage
+    }
+    
+    public func combineImages(topImage: UIImage) -> UIImage? {
+        let volleyballImage = CIImage(image: self)
+        let otherImage = CIImage(image: topImage)
+        let compositeFilter = CIFilter(name: "CIOverlayBlendMode")!
+        
+        compositeFilter.setValue(volleyballImage,
+                                 forKey: kCIInputImageKey)
+        compositeFilter.setValue(otherImage,
+                                 forKey: kCIInputBackgroundImageKey)
+        
+        if let compositeImage = compositeFilter.outputImage{
+//            let image = UIImage(CIImage: compositeImage)
+            let image = UIImage(ciImage: compositeImage)
+            // do something with the "merged" image
+            return image
+        }
+        return nil
+    }
+
 }

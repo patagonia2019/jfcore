@@ -22,8 +22,11 @@ class ViewController: BaseViewController {
         self.title = "test"
         super.viewDidLoad()
 
-        if let image = UIImage.init(named: "background") {
-            self.view.backgroundColor = image.patternColor(customSize: UIScreen.main.bounds.size)
+        if let img = UIImage.init(named: "background") {
+            self.view.backgroundColor = img.patternColor(customSize: UIScreen.main.bounds.size)
+            let topImage = UIImage.init(named: "bird")
+            let mergedImage = img.combineImages(topImage: topImage!)
+            image.image = mergedImage
         }
         self.logCurrentLanguage()
         
