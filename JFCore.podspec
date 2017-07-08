@@ -25,7 +25,7 @@ JFCore contains Accessiblity, Location, Error, Analytics and CoreDataManager cla
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Javier Fuchs' => 'javier.fuchs@gmail.com' }
-  s.source = { :git => "https://github/southfox/jfcore.git", :tag => s.version.to_s }
+  s.source = { :git => "https://github.com/southfox/jfcore.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
