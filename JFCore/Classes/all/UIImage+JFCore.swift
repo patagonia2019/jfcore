@@ -80,6 +80,7 @@ extension UIImage {
         return newImage
     }
     
+#if !os(watchOS)
     public func combineImages(topImage: UIImage) -> UIImage? {
         let volleyballImage = CIImage(image: self)
         let otherImage = CIImage(image: topImage)
@@ -91,12 +92,10 @@ extension UIImage {
                                  forKey: kCIInputBackgroundImageKey)
         
         if let compositeImage = compositeFilter.outputImage{
-//            let image = UIImage(CIImage: compositeImage)
             let image = UIImage(ciImage: compositeImage)
-            // do something with the "merged" image
             return image
         }
         return nil
     }
-
+#endif
 }

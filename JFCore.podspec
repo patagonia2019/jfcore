@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JFCore'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JFCore.'
+  s.summary          = 'JFCore is my library to work with location, error, core data, and some extensions.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,14 +18,14 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+JFCore contains Accessiblity, Location, Error, Analytics and CoreDataManager classes.
                        DESC
 
   s.homepage         = 'https://github.com/southfox'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Javier Fuchs' => 'javier.fuchs@gmail.com' }
-  s.source = { :git => "https://github/southfox/jfcore.git", :branch => s.version.to_s }
+  s.source = { :git => "https://github/southfox/jfcore.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
