@@ -12,7 +12,7 @@ public class JFError : Error {
     
     public var error: NSError?
     
-    public init(code: Int, desc: String?, reason: String?, suggestion: String?, underError error: NSError?) {
+    public init(code: Int, desc: String?, reason: String?, suggestion: String?, path: String? = nil, line: String? = nil, url: String? = nil, underError error: NSError?) {
         var dict = [String: AnyObject]()
         if let adesc = desc {
             dict[NSLocalizedDescriptionKey] = adesc as AnyObject?
@@ -27,6 +27,15 @@ public class JFError : Error {
         if let aerror = error {
             dict[NSUnderlyingErrorKey] = aerror
         }
+        if let path = path {
+            dict[NSFilePathErrorKey] = path as AnyObject
+        }
+        if let url = url {
+            dict[NSURLErrorKey] = url as AnyObject
+        }
+        if let line = line {
+            dict["NSFilePathLineKey"] = line as AnyObject
+        }
         self.error = NSError(domain: Bundle.main.bundleIdentifier!, code:code, userInfo: dict)
     }
     
@@ -40,7 +49,7 @@ public class JFError : Error {
         if let e = self.error {
             return e.localizedDescription
         }
-        return "No Title"
+        return ""
     }
     
     public func reason() -> String {
@@ -48,16 +57,31 @@ public class JFError : Error {
            let reason = e.localizedFailureReason {
             return reason
         }
-        return "No Reason"
+        return ""
     }
     
     public func asDictionary() -> [String : AnyObject]? {
         if let error = self.error {
-            return ["code": error.code as AnyObject,
-                    NSLocalizedDescriptionKey: error.localizedDescription as AnyObject,
-                    NSLocalizedFailureReasonErrorKey: (error.localizedFailureReason ?? "") as AnyObject,
-                    NSLocalizedRecoverySuggestionErrorKey: (error.localizedRecoverySuggestion ?? "") as AnyObject,
-                    NSUnderlyingErrorKey: "\(error.userInfo)" as AnyObject]
+            var dict = [String : AnyObject]()
+            dict["code"] = error.code as AnyObject
+            let ld = error.localizedDescription
+            if ld.characters.count > 0 {
+                dict[NSLocalizedDescriptionKey] = ld as AnyObject
+            }
+            if let lfr = error.localizedFailureReason {
+                dict[NSLocalizedFailureReasonErrorKey] = lfr as AnyObject
+            }
+            if let lrs = error.localizedRecoverySuggestion {
+                dict[NSLocalizedRecoverySuggestionErrorKey] = lrs as AnyObject
+            }
+            if let lro = error.localizedRecoveryOptions {
+                dict[NSLocalizedRecoveryOptionsErrorKey] = lro as AnyObject
+            }
+            let domain = error.domain
+            if domain.characters.count > 0 {
+                dict[NSCocoaErrorDomain] = domain as AnyObject
+            }            
+            return dict
         }
         return nil
     }
