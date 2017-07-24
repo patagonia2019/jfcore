@@ -12,7 +12,7 @@ public class JFError : Error {
     
     public var error: NSError?
     
-    public init(code: Int, desc: String?, reason: String?, suggestion: String?, path: String? = nil, line: String? = nil, url: String? = nil, underError error: NSError?) {
+    public init(code: Int, desc: String? = nil, reason: String? = nil, suggestion: String? = nil, path: String? = nil, line: String? = nil, url: String? = nil, underError error: NSError? = nil) {
         var dict = [String: AnyObject]()
         if let adesc = desc {
             dict[NSLocalizedDescriptionKey] = adesc as AnyObject?
