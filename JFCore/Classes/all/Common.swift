@@ -28,10 +28,10 @@ public class Common {
         objc_sync_exit(self)
     }
     
-    public class func randomColor() -> UIColor {
-        let red = CGFloat(arc4random() % 255) / 255
-        let green = CGFloat(arc4random() % 255) / 255
-        let blue = CGFloat(arc4random() % 255) / 255
+    public class func randomColor(r : CGFloat? = nil, g : CGFloat? = nil, b : CGFloat? = nil) -> UIColor {
+        let red = r ?? CGFloat(arc4random() % 255) / 255
+        let green = g ?? CGFloat(arc4random() % 255) / 255
+        let blue = b ?? CGFloat(arc4random() % 255) / 255
         return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
     }
     
