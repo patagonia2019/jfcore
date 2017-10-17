@@ -12,7 +12,10 @@ open class BaseViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.titleView = TitleView(appName: Common.app, title: self.title)
+//        self.navigationItem.backBarButtonItem?.tintColor = .white
+//        UIBarButtonItem.appearance().setTintColor = .white
+//        navigationController?.navigationBar.tintColor = .white
+        navigationItem.backBarButtonItem?.tintColor = .white
     }
 
     override open func didReceiveMemoryWarning() {

@@ -27,8 +27,8 @@ extension UIImage {
         let hw = max(size.width, size.height)
         size.width = hw
         size.height = hw
-        let gray = self.convertToGrayScale()
-        if let bg = gray.resizeImageWithSize(size: size) {
+//        let gray = self.convertToGrayScale()
+        if let bg = resizeImageWithSize(size: size) {
             let pattern = UIColor.init(patternImage: bg)
             return pattern
         }

@@ -12,7 +12,7 @@ open class BaseTableViewController: UITableViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()        
-        self.navigationItem.titleView = TitleView(appName: Common.app, title: self.title)
+        navigationItem.backBarButtonItem?.tintColor = .white
     }
     
     override open func didReceiveMemoryWarning() {
