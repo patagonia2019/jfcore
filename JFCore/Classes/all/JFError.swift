@@ -65,7 +65,7 @@ public class JFError : Error {
             var dict = [String : AnyObject]()
             dict["code"] = error.code as AnyObject
             let ld = error.localizedDescription
-            if ld.characters.count > 0 {
+            if ld.count > 0 {
                 dict[NSLocalizedDescriptionKey] = ld as AnyObject
             }
             if let lfr = error.localizedFailureReason {
@@ -78,7 +78,7 @@ public class JFError : Error {
                 dict[NSLocalizedRecoveryOptionsErrorKey] = lro as AnyObject
             }
             let domain = error.domain
-            if domain.characters.count > 0 {
+            if domain.count > 0 {
                 dict[NSCocoaErrorDomain] = domain as AnyObject
             }            
             return dict

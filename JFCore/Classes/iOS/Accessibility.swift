@@ -26,7 +26,7 @@ public extension NSObject {
     /// Configures the accessibility for all the elements
     /// Receives a labelString (mandatory), labelComment, trait and optional hint
     public func setAccessWithLabel(labelString: String, labelComment: String, trait: UIAccessibilityTraits, hint: String?) {
-        assert(labelString.characters.count > 0, "label is mandatory in Accessibility")
+        assert(labelString.count > 0, "label is mandatory in Accessibility")
         self.accessibilityLabel = NSLocalizedString(labelString, comment: labelComment)
         self.accessibilityTraits = trait
         if let h = hint {

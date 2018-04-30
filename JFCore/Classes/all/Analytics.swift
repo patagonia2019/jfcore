@@ -85,11 +85,11 @@ public class Analytics : NSObject {
         print("[")
         for (k,v) in errorDictionary {
             let indexKey = k.index(k.startIndex,
-                                   offsetBy: min(Constants.maxLength, k.characters.count))
+                                   offsetBy: min(Constants.maxLength, k.count))
             let key = String(k[..<indexKey])
             if let string = v as? String {
                 let indexValue = string.index(string.startIndex,
-                                              offsetBy: min(Constants.maxLength, string.characters.count))
+                                              offsetBy: min(Constants.maxLength, string.count))
                 let value = string[..<indexValue]
                 parameters[key] = value as AnyObject
                 print("\(key) = \(value)")
