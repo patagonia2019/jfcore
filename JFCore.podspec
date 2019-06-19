@@ -22,25 +22,18 @@ JFCore contains Accessiblity, Location, Error, Analytics and CoreDataManager cla
                        DESC
 
   s.homepage         = 'https://github.com/southfox'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Javier Fuchs' => 'javier.fuchs@gmail.com' }
   s.source = { :git => "https://github.com/southfox/jfcore.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-#  s.osx.deployment_target = '10.9'
-#  s.tvos.deployment_target = '9.0'
+  s.osx.deployment_target = '10.9'
+  s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '2.2'
 
-  s.ios.source_files = 'JFCore/Classes/**/*'
-  s.watchos.source_files = 'JFCore/Classes/all/**/*'
+  s.ios.source_files = 'JFCore/Classes/**/*.swift'
+  s.osx.source_files = 'JFCore/Classes/**/*.swift'
+  s.tvos.source_files = 'JFCore/Classes/**/*.swift'
+  s.watchos.source_files = 'JFCore/Classes/all/**/*.swift'
   
-  # s.resource_bundles = {
-  #   'JFCore' => ['JFCore/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

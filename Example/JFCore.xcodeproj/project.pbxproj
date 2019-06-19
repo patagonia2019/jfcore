@@ -228,6 +228,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -269,7 +270,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JFCore/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -278,7 +279,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		88123D2B6DCA0D6BB97164C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -475,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = JFCore/Info.plist;
+				INFOPLIST_FILE = /Users/fox/patagonia2019/jfcore/Example/JFCore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -491,7 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = JFCore/Info.plist;
+				INFOPLIST_FILE = /Users/fox/patagonia2019/jfcore/Example/JFCore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

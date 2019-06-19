@@ -46,10 +46,10 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     //
     private override init() {
         super.init()
+        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        locationManager.distanceFilter = JFCore.Constants.minimumDistanceFilterInMeters
-        locationManager.delegate = self
     }
     
     //
