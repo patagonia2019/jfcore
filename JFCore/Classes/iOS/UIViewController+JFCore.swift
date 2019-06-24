@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 public extension UIViewController {
-    
     internal func titleView() -> TitleView {
         return TitleView(appName: Common.app, title: self.title)
     }
-
 }

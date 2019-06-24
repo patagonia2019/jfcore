@@ -1,29 +1,32 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
-      "filename" : "71yg1 copy 2.png",
-      "scale" : "1x"
+      "idiom" : "universal",
+      "filename" : "71yg1 copy 2.png"
     },
     {
       "idiom" : "iphone",
-      "filename" : "71yg1 copy.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "filename" : "71yg1.png",
-      "scale" : "3x"
+      "filename" : "71yg1 copy.png"
     },
     {
       "idiom" : "ipad",
-      "filename" : "71yg1 copy 2-1.png",
-      "scale" : "1x"
+      "filename" : "71yg1.png"
     },
     {
-      "idiom" : "ipad",
-      "filename" : "71yg1 copy-1.png",
-      "scale" : "2x"
+      "idiom" : "car",
+      "filename" : "71yg1 copy 2-1.png"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "71yg1 copy-1.png"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "71yg1 copy 2-1 copy.png"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "71yg1 copy 2-1 copy 2.png"
     }
   ],
   "info" : {

@@ -12,11 +12,11 @@ import JFCore
 
 class ViewController: BaseViewController {
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var location: UILabel!
     @IBOutlet weak var placemark: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var button: UIButton!
-    var location : CLLocation?
+    var currentLocation : CLLocation?
     var placemarks : [CLPlacemark]?
     
     override func viewDidLoad() {
@@ -29,11 +29,10 @@ class ViewController: BaseViewController {
             let mergedImage = img.combineImages(topImage: topImage!)
             image.image = mergedImage
         }
-        self.logCurrentLanguage()
         
         self.navigationItem.setAccessHeader(string: "This is the header")
         
-        self.label.setAccessLabel()
+        self.location.setAccessLabel()
         self.placemark.setAccessLabel()
         self.button.setAccessButton(string: "This is the button")
         self.image.setAccessImage(string: "This is the image")
@@ -61,22 +60,21 @@ class ViewController: BaseViewController {
         self.unobserveLocationServices()
         
         let queue = OperationQueue.main
-        NotificationCenter.default
-            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: queue) {
+        let nc = NotificationCenter.default
+        nc.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationUpdated), object: nil, queue: queue) {
                 [weak self] (NSNotification) in
                 guard let locs = LocationManager.instance.locations,
                     let f = locs.first,
                     let strong = self else {
                         return
                 }
-                strong.label.text = strong.locationDescription(f)
-                strong.location = f
-                strong.label.setAccessLabel()
+                strong.location.text = strong.locationDescription(f)
+                strong.currentLocation = f
+                strong.location.setAccessLabel()
                 strong.reverseLocation(f)
         }
         
-        NotificationCenter.default
-            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil, queue: queue) {
+        nc.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationError), object: nil, queue: queue) {
                 [weak self]
                 note in
                 if let _: Error = note.object as? Error,
@@ -85,8 +83,7 @@ class ViewController: BaseViewController {
                 }
         }
         
-        NotificationCenter.default
-            .addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationAuthorized), object: nil, queue: queue) {
+        nc.addObserver(forName: NSNotification.Name(rawValue: JFCore.Constants.Notification.locationAuthorized), object: nil, queue: queue) {
                 (NSNotification) in
                 if !JFCore.LocationManager.instance.isAuthorized() {
                     // do nothing
@@ -94,78 +91,17 @@ class ViewController: BaseViewController {
         }
     }
     
-    func locationTitle(_ location : CLLocation) -> String {
-        var aux : String = "["
-        aux += "\(location.coordinate.latitude);"
-        aux += "\(location.coordinate.longitude)"
-        aux += "]"
-        return aux
+    func locationTitle(_ currentLocation : CLLocation) -> String {
+        return currentLocation.title()
     }
 
-    func locationDescription(_ location : CLLocation) -> String {
-        var level : Int = 0
-        if let floor = location.floor {
-            level = floor.level
-        }
-        var aux : String = "["
-        aux += "\(location.coordinate.latitude);"
-        aux += "\(location.coordinate.longitude);"
-        aux += "\(location.altitude);"
-        aux += "\(location.horizontalAccuracy);"
-        aux += "\(location.verticalAccuracy);"
-        aux += "\(level)"
-        aux += "]"
-        return aux
+    func locationDescription(_ currentLocation : CLLocation) -> String {
+        return currentLocation.longDescription()
     }
     
     
     func placemarkDescription(_ placemark : CLPlacemark) -> String {
-        
-        var aux : String = "["
-        if let _administrativeArea = placemark.administrativeArea {
-            aux += "\(_administrativeArea);"
-        } else { aux += "();" }
-        if let _areasOfInterest = placemark.areasOfInterest {
-            aux += "\(_areasOfInterest);"
-        } else { aux += "();" }
-        if let _country = placemark.country {
-            aux += "\(_country);"
-        } else { aux += "();" }
-        if let _inlandWater = placemark.inlandWater {
-            aux += "\(_inlandWater);"
-        } else { aux += "();" }
-        if let _isoCountryCode = placemark.isoCountryCode {
-            aux += "\(_isoCountryCode);"
-        } else { aux += "();" }
-        if let _locality = placemark.locality {
-            aux += "\(_locality);"
-        } else { aux += "();" }
-        if let _name = placemark.name {
-            aux += "\(_name);"
-        } else { aux += "();" }
-        if let _ocean = placemark.ocean {
-            aux += "\(_ocean);"
-        } else { aux += "();" }
-        if let _postalCode = placemark.postalCode {
-            aux += "\(_postalCode);"
-        } else { aux += "();" }
-        if let _subAdministrativeArea = placemark.subAdministrativeArea {
-            aux += "\(_subAdministrativeArea);"
-        } else { aux += "();" }
-        if let _subLocality = placemark.subLocality {
-            aux += "\(_subLocality);"
-        } else { aux += "();" }
-        if let _subThoroughfare = placemark.subThoroughfare {
-            aux += "\(_subThoroughfare);"
-        } else { aux += "();" }
-        if let _thoroughfare = placemark.thoroughfare {
-            aux += "\(_thoroughfare);"
-        } else { aux += "();" }
-        if let _location = placemark.location {
-            aux += "\(_location.description)"
-        } else { aux += "()" }
-        aux += "]"
-        return aux
+        return placemark.longDescription()
     }
 
     
@@ -182,19 +118,6 @@ class ViewController: BaseViewController {
                              JFCore.Constants.Notification.locationError,
                              JFCore.Constants.Notification.locationAuthorized] {
                                 NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: notification), object: nil);
-        }
-    }
-    
-    fileprivate func logCurrentLanguage()
-    {
-        let locale = Locale.current
-        for key in [NSLocale.Key.identifier, NSLocale.Key.languageCode, NSLocale.Key.countryCode, NSLocale.Key.scriptCode, NSLocale.Key.variantCode, NSLocale.Key.usesMetricSystem, NSLocale.Key.measurementSystem, NSLocale.Key.decimalSeparator] {
-            if let name = (locale as NSLocale).object(forKey: key) {
-                Analytics.logFunction(function: #function, parameters: [key.rawValue : name as AnyObject])
-            }
-        }
-        if let calendar = (locale as NSLocale).object(forKey: NSLocale.Key.calendar) as? Calendar {
-            Analytics.logFunction(function: #function, parameters: [NSLocale.Key.calendar.rawValue : calendar.identifier as AnyObject])
         }
     }
 
@@ -219,11 +142,11 @@ class ViewController: BaseViewController {
         if segue.identifier == "list" {
             let vc:ListViewController = segue.destination as! ListViewController
             guard let ps = self.placemarks,
-                      let l = self.location else {
+                      let currentLocation = self.currentLocation else {
                         return
             }
             vc.placemarks = ps
-            vc.title = self.locationTitle(l)
+            vc.title = self.locationTitle(currentLocation)
         }
     }
     

@@ -44,12 +44,17 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     //
     // initialization
     //
-    private override init() {
-        super.init()
+
+    private func setup() {
         locationManager.delegate = self
+        #if os(tvOS)
+        locationManager.requestWhenInUseAuthorization()
+        #elseif os(watchOS)
         locationManager.requestAlwaysAuthorization()
+        #else
+        locationManager.requestAlwaysAuthorization()
+        #endif
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.distanceFilter = JFCore.Constants.minimumDistanceFilterInMeters
     }
     
     //
@@ -57,10 +62,13 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     //
     public func start()
     {
-        if #available(iOS 9.0, *) {
-            locationManager.requestLocation()
-            running = true
-        }
+        setup()
+//        #if os(watchOS)
+//        locationManager.startUpdatingLocation()
+//        #else
+        locationManager.requestLocation()
+//        #endif
+        running = true
     }
     
     
@@ -70,8 +78,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     public func stop()
     {
         running = false
-        if (CLLocationManager.locationServicesEnabled())
-        {
+        if (CLLocationManager.locationServicesEnabled()) {
             locationManager.stopUpdatingLocation()
         }
     }

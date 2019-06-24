@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="Main" title="Main" animationDuration="1" alwaysBounce="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
+                    <items>
+                        <label width="136" alignment="left" text="Location" id="55R-8U-Fta"/>
+                        <label width="136" alignment="left" text="Placemark" id="cWY-YA-QTs"/>
+                        <imageView alignment="left" image="background" id="uLZ-dl-4Yp"/>
+                        <button width="1" alignment="left" title="Button" id="GUN-qx-Yhj">
+                            <connections>
+                                <segue destination="4S9-yu-H8d" kind="push" identifier="list" id="8gV-ns-Kcp"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="image" destination="uLZ-dl-4Yp" id="ooz-YY-aSp"/>
+                        <outlet property="location" destination="55R-8U-Fta" id="IUX-FG-Z8E"/>
+                        <outlet property="placemark" destination="cWY-YA-QTs" id="hBw-4t-KQJ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--List Controller-->
+        <scene sceneID="THf-G0-Lkh">
+            <objects>
+                <controller id="4S9-yu-H8d" customClass="ListController" customModule="Watch" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="LeF-mU-zkB">
+                            <items>
+                                <tableRow identifier="TableViewCellIdentifier" id="wyO-4D-7pl">
+                                    <group key="rootItem" width="1" alignment="left" alpha="0.29999999999999999" backgroundImage="background" layout="vertical" id="k21-Sb-l7x" customClass="MyRowController" customModule="Watch" customModuleProvider="target">
+                                        <items>
+                                            <label width="113" alignment="left" text="Label" id="5dr-yd-e7Z"/>
+                                            <label width="113" alignment="left" text="Label" id="ba3-lV-ztu"/>
+                                        </items>
+                                        <connections>
+                                            <outlet property="itemDescription" destination="ba3-lV-ztu" id="SJa-Hn-hXD"/>
+                                            <outlet property="itemLabel" destination="5dr-yd-e7Z" id="fve-3V-jrB"/>
+                                        </connections>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="LeF-mU-zkB" id="Nga-hW-67d"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="47"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="345"/>
+        </scene>
+    </scenes>
+</document>
