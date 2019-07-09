@@ -30,7 +30,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="106" y="323"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -56,24 +56,42 @@
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
-        <!--List Controller-->
+        <!--Placemarks-->
         <scene sceneID="THf-G0-Lkh">
             <objects>
-                <controller id="4S9-yu-H8d" customClass="ListController" customModule="Watch" customModuleProvider="target">
+                <controller title="Placemarks" id="4S9-yu-H8d" customClass="ListController" customModule="Watch" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="LeF-mU-zkB">
                             <items>
-                                <tableRow identifier="TableViewCellIdentifier" id="wyO-4D-7pl">
-                                    <group key="rootItem" width="1" alignment="left" alpha="0.29999999999999999" backgroundImage="background" layout="vertical" id="k21-Sb-l7x" customClass="MyRowController" customModule="Watch" customModuleProvider="target">
+                                <tableRow identifier="TableViewCellIdentifier" id="wyO-4D-7pl" customClass="MyRowController" customModule="Watch_Extension">
+                                    <group key="rootItem" width="1" height="38" alignment="left" layout="overlap" id="k21-Sb-l7x">
                                         <items>
-                                            <label width="113" alignment="left" text="Label" id="5dr-yd-e7Z"/>
-                                            <label width="113" alignment="left" text="Label" id="ba3-lV-ztu"/>
+                                            <group width="1" alignment="left" alpha="0.29999999999999999" backgroundImage="background" id="aZH-RI-1Fy"/>
+                                            <group width="1" height="1" alignment="left" id="vn2-Wj-9hC">
+                                                <items>
+                                                    <imageView width="32" height="1" alignment="left" image="bird" id="KBN-DP-oA6"/>
+                                                    <group width="100" height="1" alignment="left" layout="vertical" id="G5e-0p-KnE">
+                                                        <items>
+                                                            <label width="113" alignment="left" text="Label" textAlignment="left" id="5dr-yd-e7Z">
+                                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                            </label>
+                                                            <label width="113" alignment="left" text="Label" minimumScaleFactor="0.5" id="ba3-lV-ztu">
+                                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </group>
                                         </items>
-                                        <connections>
-                                            <outlet property="itemDescription" destination="ba3-lV-ztu" id="SJa-Hn-hXD"/>
-                                            <outlet property="itemLabel" destination="5dr-yd-e7Z" id="fve-3V-jrB"/>
-                                        </connections>
                                     </group>
+                                    <connections>
+                                        <outlet property="itemDescription" destination="ba3-lV-ztu" id="xEf-er-279"/>
+                                        <outlet property="itemImage" destination="KBN-DP-oA6" id="Kek-Km-uJx"/>
+                                        <outlet property="itemLabel" destination="5dr-yd-e7Z" id="gjb-Y3-let"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>

@@ -41,12 +41,12 @@ class ViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.observeLocationServices()
+        observeLocationServices()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unobserveLocationServices()
+        unobserveLocationServices()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +57,7 @@ class ViewController: BaseViewController {
 
     fileprivate func observeLocationServices()
     {
-        self.unobserveLocationServices()
+        unobserveLocationServices()
         
         let queue = OperationQueue.main
         let nc = NotificationCenter.default
