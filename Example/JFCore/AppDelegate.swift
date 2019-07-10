@@ -6,27 +6,47 @@
 //  Copyright © 2016 Mobile Patagonia. All rights reserved.
 //
 
-import UIKit
 import JFCore
+
+#if os(macOS)
+import Cocoa
+
+@NSApplicationMain
+class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var started: Bool = false
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Insert code here to initialize your application
+        didFinishLaunching()
+    }
+    
+    func applicationWillTerminate(_ aNotification: Notification) {
+        willTerminate()
+    }
+}
+
+#else
+import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     var started: Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        started = true
-        LocationManager.instance.start()
+        didFinishLaunching()
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-        LocationManager.instance.stop()
-        started = false
+        willTerminate()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -52,3 +72,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+#endif
+
+extension AppDelegate {
+    private func didFinishLaunching() {
+        started = true
+        LocationManager.instance.start()
+    }
+    
+    private func willTerminate() {
+        LocationManager.instance.stop()
+        started = false
+    }
+}

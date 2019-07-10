@@ -17,11 +17,12 @@
 		93E01C450BF9C837E7E9A309 /* Pods_macos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FD4387C9BD8C052FC99001 /* Pods_macos.framework */; };
 		95138BF01D73D6EB002808B1 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95138BEF1D73D6EB002808B1 /* ListViewController.swift */; };
 		9866D39B22BFB0F20052C03E /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866D39A22BFB0F20052C03E /* ListController.swift */; };
+		986A08AD22D5807B0032D503 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		986A08AE22D581BD0032D503 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		986A08AF22D583970032D503 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898A2A722BCF57400474B66 /* ListViewController.swift */; };
 		9896903722BF9E2B00CB585F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98A4C45622BD03AE0085EB79 /* Images.xcassets */; };
 		9896903822BF9E3600CB585F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9898A2A922BCF57500474B66 /* Images.xcassets */; };
 		9896903922BFA24800CB585F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		9898A2A622BCF57400474B66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898A2A522BCF57400474B66 /* AppDelegate.swift */; };
-		9898A2A822BCF57400474B66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9898A2A722BCF57400474B66 /* ViewController.swift */; };
 		9898A2AD22BCF57500474B66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9898A2AB22BCF57500474B66 /* Main.storyboard */; };
 		98A4C45022BD02F40085EB79 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95138BEF1D73D6EB002808B1 /* ListViewController.swift */; };
 		98A4C45122BD03050085EB79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -114,8 +115,7 @@
 		95138BEF1D73D6EB002808B1 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9866D39A22BFB0F20052C03E /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		9898A2A322BCF57400474B66 /* macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macos.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9898A2A522BCF57400474B66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9898A2A722BCF57400474B66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9898A2A722BCF57400474B66 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9898A2A922BCF57500474B66 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../JFCore/Images.xcassets; sourceTree = "<group>"; };
 		9898A2AC22BCF57500474B66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9898A2AE22BCF57500474B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -302,8 +302,7 @@
 		9898A2A422BCF57400474B66 /* macos */ = {
 			isa = PBXGroup;
 			children = (
-				9898A2A522BCF57400474B66 /* AppDelegate.swift */,
-				9898A2A722BCF57400474B66 /* ViewController.swift */,
+				9898A2A722BCF57400474B66 /* ListViewController.swift */,
 				9898A2A922BCF57500474B66 /* Images.xcassets */,
 				9898A2AB22BCF57500474B66 /* Main.storyboard */,
 				9898A2AE22BCF57500474B66 /* Info.plist */,
@@ -409,6 +408,7 @@
 				9898A29F22BCF57400474B66 /* Sources */,
 				9898A2A022BCF57400474B66 /* Frameworks */,
 				9898A2A122BCF57400474B66 /* Resources */,
+				4CAAAB91B4C529E356FA1C55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -497,6 +497,11 @@
 						CreatedOnToolsVersion = 10.2.1;
 						DevelopmentTeam = 27XTSJS68A;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					98A63D0222BAC58C00CABEBA = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -636,6 +641,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4CAAAB91B4C529E356FA1C55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macos/Pods-macos-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JFCore-macOS/JFCore.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macos/Pods-macos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4F5CE75067DEC64349EC3038 /* [CP] Embed Pods Frameworks */ = {
@@ -787,8 +814,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9898A2A822BCF57400474B66 /* ViewController.swift in Sources */,
-				9898A2A622BCF57400474B66 /* AppDelegate.swift in Sources */,
+				986A08AE22D581BD0032D503 /* ViewController.swift in Sources */,
+				986A08AD22D5807B0032D503 /* AppDelegate.swift in Sources */,
+				986A08AF22D583970032D503 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

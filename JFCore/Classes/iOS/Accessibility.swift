@@ -6,9 +6,9 @@
 //
 //
 
+#if !os(macOS)
 import Foundation
 import UIKit
-
 public extension NSObject {
     
     struct Constants {
@@ -149,3 +149,4 @@ public extension UILabel {
     }
 }
 
+#endif

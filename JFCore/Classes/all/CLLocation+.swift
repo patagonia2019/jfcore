@@ -20,9 +20,12 @@ extension CLLocation {
     
     public func longDescription() -> String {
         var level : Int = 0
+        #if os(macOS)
+        #else
         if let floor = floor {
             level = floor.level
         }
+        #endif
         var aux : String = "["
         aux += "\(coordinate.latitude);"
         aux += "\(coordinate.longitude);"

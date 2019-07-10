@@ -6,6 +6,7 @@
 //  Copyright © 2016 Mobile Patagonia. All rights reserved.
 //
 
+#if !os(macOS)
 import UIKit
 
 open class BaseTableViewController: UITableViewController {
@@ -25,3 +26,4 @@ open class BaseTableViewController: UITableViewController {
     
 }
 
+#endif

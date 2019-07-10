@@ -6,24 +6,30 @@
 //  Copyright © 2016 Mobile Patagonia. All rights reserved.
 //
 
+#if os(macOS)
+import Cocoa
+#else
 import UIKit
+#endif
 
 open class BaseViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        #if !os(tvOS)
+        #if os(iOS)
         navigationItem.backBarButtonItem?.tintColor = .white
         #endif
 
         self.logCurrentLanguage()
     }
 
+    #if !os(macOS)
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
         Analytics.logMemoryWarning(function: #function, line: #line)
     }
+    #endif
 
     fileprivate func logCurrentLanguage()
     {

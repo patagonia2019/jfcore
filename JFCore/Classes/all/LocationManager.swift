@@ -51,6 +51,8 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         #elseif os(watchOS)
         locationManager.requestAlwaysAuthorization()
+        #elseif os(macOS)
+        locationManager.requestLocation()
         #else
         locationManager.requestAlwaysAuthorization()
         #endif
@@ -63,8 +65,28 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     public func start()
     {
         setup()
-//        #if os(watchOS)
+//        #if os(macOS)
 //        locationManager.startUpdatingLocation()
+        
+//        let status = CLLocationManager.authorizationStatus()
+//        if status == .restricted || status == .denied {
+//
+//            print("Location Denied")
+//
+//            return
+//        }
+//        else if status == .notDetermined {
+//
+//            print("Show ask for location")
+//
+//            return
+//        }
+//        else if status == .authorized {
+//            print("This should work?")
+//
+//            return
+//        }
+//
 //        #else
         locationManager.requestLocation()
 //        #endif
@@ -112,8 +134,12 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     
     public func isAuthorized() -> Bool {
+#if os(macOS)
+        return CLLocationManager.authorizationStatus() == .authorizedAlways
+#else
         return CLLocationManager.authorizationStatus() == .authorizedAlways ||
             CLLocationManager.authorizationStatus() == .authorizedWhenInUse
+#endif
     }
     
     private func notifyChanges(locations : [CLLocation]) {
@@ -169,7 +195,12 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
-        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
+#if os(macOS)
+        let check = status == .authorizedAlways
+#else
+        let check = status == .authorizedAlways || status == .authorizedWhenInUse
+#endif
+        if (check) {
             self.notifyName(aName: JFCore.Constants.Notification.locationAuthorized, object: nil)
         }
     }

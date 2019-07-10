@@ -21,7 +21,7 @@ target 'tvos' do
 end
 
 target 'macos' do
-  platform :macos, '10.9'
+  platform :macos, '10.14'
   pod 'JFCore', :path => '../'
 end
 

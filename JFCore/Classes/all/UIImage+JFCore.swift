@@ -7,35 +7,52 @@
 //
 
 import Foundation
-#if !os(macOS)
+#if os(macOS)
+import Cocoa
+public typealias UIImage = NSImage
+#else
 import UIKit
 #endif
 
 extension UIImage {
 
-    public func resizeImageWithSize(size: CGSize) -> UIImage? {
+    public func resized(to: CGSize) -> UIImage? {
+#if os(macOS)
+        let img = NSImage(size: to)
+        img.lockFocus()
+        defer {
+            img.unlockFocus()
+        }
+        if let ctx = NSGraphicsContext.current {
+            ctx.imageInterpolation = .high
+            draw(in: NSRect(origin: .zero, size: to),
+                 from: NSRect(origin: .zero, size: size),
+                 operation: .copy,
+                 fraction: 1)
+        }
+#else
         UIGraphicsBeginImageContext(size)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        self.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        draw(in: rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        return newImage
+#endif
+        return img
     }
-    
+
+#if !os(macOS)
     public func patternColor(customSize: CGSize) -> UIColor
     {
         var size = customSize
         let hw = max(size.width, size.height)
         size.width = hw
         size.height = hw
-        if let bg = resizeImageWithSize(size: size) {
+        if let bg = resized(to: size) {
             let pattern = UIColor.init(patternImage: bg)
             return pattern
         }
         return UIColor.black
     }
-    
     public func convertToGrayScale() -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         let colorSpace = CGColorSpaceCreateDeviceGray()
@@ -80,16 +97,16 @@ extension UIImage {
         
         return newImage
     }
-    
+
 #if !os(watchOS)
     public func combineImages(topImage: UIImage) -> UIImage? {
-        let volleyballImage = CIImage(image: self)
-        let otherImage = CIImage(image: topImage)
+        let ci = CIImage(image: self)
+        let topImage = CIImage(image: topImage)
         let compositeFilter = CIFilter(name: "CIOverlayBlendMode")!
-        
-        compositeFilter.setValue(volleyballImage,
+
+        compositeFilter.setValue(ci,
                                  forKey: kCIInputImageKey)
-        compositeFilter.setValue(otherImage,
+        compositeFilter.setValue(topImage,
                                  forKey: kCIInputBackgroundImageKey)
         
         if let compositeImage = compositeFilter.outputImage{
@@ -99,4 +116,6 @@ extension UIImage {
         return nil
     }
 #endif
+#endif
+
 }

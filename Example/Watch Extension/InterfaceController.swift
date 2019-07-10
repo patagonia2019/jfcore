@@ -109,6 +109,7 @@ class InterfaceController: WKInterfaceController {
     
     func reverseLocation(_ location : CLLocation) {
         #if targetEnvironment(simulator)
+        // TODO: watch os under simulator environment does not reverse location.
         placemarks = [Placemark.init()]
         placemark.setText(placemarks?.first?.country)
         #else
