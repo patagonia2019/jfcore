@@ -20,8 +20,7 @@ extension CLLocation {
     
     public func longDescription() -> String {
         var level : Int = 0
-        #if os(macOS)
-        #else
+        #if !os(macOS)
         if let floor = floor {
             level = floor.level
         }

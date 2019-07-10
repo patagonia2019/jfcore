@@ -52,7 +52,6 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         #elseif os(watchOS)
         locationManager.requestAlwaysAuthorization()
         #elseif os(macOS)
-        locationManager.requestLocation()
         #else
         locationManager.requestAlwaysAuthorization()
         #endif
@@ -65,31 +64,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     public func start()
     {
         setup()
-//        #if os(macOS)
-//        locationManager.startUpdatingLocation()
-        
-//        let status = CLLocationManager.authorizationStatus()
-//        if status == .restricted || status == .denied {
-//
-//            print("Location Denied")
-//
-//            return
-//        }
-//        else if status == .notDetermined {
-//
-//            print("Show ask for location")
-//
-//            return
-//        }
-//        else if status == .authorized {
-//            print("This should work?")
-//
-//            return
-//        }
-//
-//        #else
         locationManager.requestLocation()
-//        #endif
         running = true
     }
     
