@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JFCore'
-  s.version          = '0.1.0'
+  s.version          = '1.0'
   s.summary          = 'JFCore is my library to work with location, error, core data, and some extensions.'
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ JFCore contains Accessiblity, Location, Error, Analytics and CoreDataManager cla
 
   s.homepage         = 'https://github.com/southfox'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Javier Fuchs' => 'javier.fuchs@gmail.com' }
+  s.author           = { 'Javier Fuchs' => 'mobilepatagonia@gmail.com' }
   s.source = { :git => "https://github.com/southfox/jfcore.git", :tag => s.version.to_s }
 
   s.ios.deployment_target = '12.0'

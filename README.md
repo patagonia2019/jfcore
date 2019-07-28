@@ -1,16 +1,20 @@
 
 # JFCore
 
-[![CI Status](http://img.shields.io/travis/Javier Fuchs/JFCore.svg?style=flat)](https://travis-ci.org/Javier Fuchs/JFCore)
-[![Version](https://img.shields.io/cocoapods/v/JFCore.svg?style=flat)](http://cocoapods.org/pods/JFCore)
-[![License](https://img.shields.io/cocoapods/l/JFCore.svg?style=flat)](http://cocoapods.org/pods/JFCore)
-[![Platform](https://img.shields.io/cocoapods/p/JFCore.svg?style=flat)](http://cocoapods.org/pods/JFCore)
-
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
+* ios.deployment_target = '12.0'
+
+* osx.deployment_target = '10.14'
+
+* tvos.deployment_target = '12.0'
+
+* watchos.deployment_target = '5.2'
+
 
 ## Installation
 
@@ -25,10 +29,33 @@ pod "JFCore"
 
 Javier Fuchs, javier.fuchs@gmail.com
 
-## License
-
-JFCore is available under the MIT license. See the LICENSE file for more info.
-
 ## Check cocoapods lib
 pod lib lint --allow-warnings --verbose --no-clean 
+
+## License
+
+MIT License
+
+Copyright (c) 2019 Mobile Patagonia. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+[Contact me](https://mobilepatagonia.wixsite.com/website)
 
