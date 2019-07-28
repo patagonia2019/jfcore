@@ -7,7 +7,12 @@
 //
 
 import Foundation
+#if os(macOS)
+import Cocoa
+public typealias UIColor = NSColor
+#else
 import UIKit
+#endif
 
 public class Common {
 
@@ -35,6 +40,4 @@ public class Common {
         let blue = isPastel && rgb != 2 ? 1 : b ?? CGFloat(arc4random() % 255) / 255
         return UIColor.init(red: red, green: green, blue: blue, alpha: 1)
     }
-    
-    
 }

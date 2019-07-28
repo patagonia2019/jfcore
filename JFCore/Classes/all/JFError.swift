@@ -46,18 +46,33 @@ public class JFError : Error {
     }
     
     public func title() -> String {
-        if let e = self.error {
-            return e.localizedDescription
-        }
-        return ""
+        return error?.localizedDescription ?? "Unknown error"
     }
     
-    public func reason() -> String {
-        if let e = self.error,
-           let reason = e.localizedFailureReason {
-            return reason
+    public func message() -> String {
+        var str = [String]()
+        if let aux = underlyingError() {
+            str.append(aux)
         }
-        return ""
+        if let aux = reason() {
+            str.append(aux)
+        }
+        if let aux = error?.localizedRecoverySuggestion {
+            str.append(aux)
+        }
+        return str.joined(separator: "\n")
+    }
+    
+    public func underlyingError() -> String? {
+        return error?.userInfo[NSUnderlyingErrorKey] as? String
+    }
+    
+    public func reason() -> String? {
+        return error?.localizedFailureReason
+    }
+
+    public func suggestion() -> String? {
+        return error?.localizedRecoverySuggestion
     }
     
     public func asDictionary() -> [String : AnyObject]? {

@@ -2,18 +2,31 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "e5691820a1e4855ef2450134b3915149-2.png",
-      "scale" : "1x"
+      "filename" : "e5691820a1e4855ef2450134b3915149-2.png"
     },
     {
-      "idiom" : "universal",
-      "filename" : "e5691820a1e4855ef2450134b3915149-1.png",
-      "scale" : "2x"
+      "idiom" : "iphone",
+      "filename" : "e5691820a1e4855ef2450134b3915149-1.png"
     },
     {
-      "idiom" : "universal",
-      "filename" : "e5691820a1e4855ef2450134b3915149.png",
-      "scale" : "3x"
+      "idiom" : "ipad",
+      "filename" : "e5691820a1e4855ef2450134b3915149.png"
+    },
+    {
+      "idiom" : "car",
+      "filename" : "e5691820a1e4855ef2450134b3915149-2 copy.png"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "e5691820a1e4855ef2450134b3915149-2 copy 2.png"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "e5691820a1e4855ef2450134b3915149-2 copy 3.png"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "e5691820a1e4855ef2450134b3915149-2 copy 4.png"
     }
   ],
   "info" : {

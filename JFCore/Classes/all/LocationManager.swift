@@ -44,12 +44,18 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     //
     // initialization
     //
-    private override init() {
-        super.init()
+
+    private func setup() {
         locationManager.delegate = self
+        #if os(tvOS)
+        locationManager.requestWhenInUseAuthorization()
+        #elseif os(watchOS)
         locationManager.requestAlwaysAuthorization()
+        #elseif os(macOS)
+        #else
+        locationManager.requestAlwaysAuthorization()
+        #endif
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.distanceFilter = JFCore.Constants.minimumDistanceFilterInMeters
     }
     
     //
@@ -57,10 +63,9 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     //
     public func start()
     {
-        if #available(iOS 9.0, *) {
-            locationManager.requestLocation()
-            running = true
-        }
+        setup()
+        locationManager.requestLocation()
+        running = true
     }
     
     
@@ -70,8 +75,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     public func stop()
     {
         running = false
-        if (CLLocationManager.locationServicesEnabled())
-        {
+        if (CLLocationManager.locationServicesEnabled()) {
             locationManager.stopUpdatingLocation()
         }
     }
@@ -105,8 +109,12 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     
     public func isAuthorized() -> Bool {
+#if os(macOS)
+        return CLLocationManager.authorizationStatus() == .authorizedAlways
+#else
         return CLLocationManager.authorizationStatus() == .authorizedAlways ||
             CLLocationManager.authorizationStatus() == .authorizedWhenInUse
+#endif
     }
     
     private func notifyChanges(locations : [CLLocation]) {
@@ -162,7 +170,12 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
-        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
+#if os(macOS)
+        let check = status == .authorizedAlways
+#else
+        let check = status == .authorizedAlways || status == .authorizedWhenInUse
+#endif
+        if (check) {
             self.notifyName(aName: JFCore.Constants.Notification.locationAuthorized, object: nil)
         }
     }

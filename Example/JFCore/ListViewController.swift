@@ -30,16 +30,32 @@ class ListViewController: BaseTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "okidoki", for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellIdentifier", for: indexPath as IndexPath)
+        #if os(tvOS)
+        cell.imageView?.adjustsImageWhenAncestorFocused = true
+        #endif
         if let ps = placemarks,
             let tl = cell.textLabel,
             let dtl = cell.detailTextLabel {
             let p = ps[indexPath.row] as CLPlacemark
+            #if os(tvOS)
+            tl.font = UIFont.boldSystemFont(ofSize: 46)
+            dtl.font = UIFont.boldSystemFont(ofSize: 36)
+            #else
             tl.font = UIFont.boldSystemFont(ofSize: 16)
+            #endif
             tl.text = p.locality
             dtl.text = p.country
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        #if os(tvOS)
+        return 200
+        #else
+        return 66
+        #endif
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,5 +65,6 @@ class ListViewController: BaseTableViewController {
     }
     
 }
+
 
 

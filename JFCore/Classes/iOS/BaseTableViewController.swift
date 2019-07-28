@@ -6,13 +6,16 @@
 //  Copyright © 2016 Mobile Patagonia. All rights reserved.
 //
 
+#if !os(macOS)
 import UIKit
 
 open class BaseTableViewController: UITableViewController {
     
     override open func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        #if !os(tvOS)
         navigationItem.backBarButtonItem?.tintColor = .white
+        #endif
     }
     
     override open func didReceiveMemoryWarning() {
@@ -23,3 +26,4 @@ open class BaseTableViewController: UITableViewController {
     
 }
 
+#endif

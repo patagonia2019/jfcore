@@ -1,13 +1,28 @@
 use_frameworks!
 
 target 'JFCore_Example' do
-  platform :ios, '10.0'
+  platform :ios, '12.0'
   pod 'JFCore', :path => '../'
 
   target 'JFCore_Tests' do
     inherit! :search_paths
-
-    
   end
+
 end
+
+target 'Watch Extension' do
+  platform :watchos, '5.2'
+  pod 'JFCore', :path => '../'
+end
+
+target 'tvos' do
+  platform :tvos, '12.0'
+  pod 'JFCore', :path => '../'
+end
+
+target 'macos' do
+  platform :macos, '10.14'
+  pod 'JFCore', :path => '../'
+end
+
 
