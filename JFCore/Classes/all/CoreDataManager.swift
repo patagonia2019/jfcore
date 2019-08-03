@@ -80,7 +80,13 @@ public class CoreDataManager {
         
     lazy var storeURL: URL? = {
         guard let bundleID = Bundle.main.bundleIdentifier else { fatalError() }
-        return applicationSupportDirectory.appendingPathComponent(bundleID + ".sqlite3")
+        guard let info = Bundle.main.infoDictionary,
+            let bundleShortVersion = info["CFBundleShortVersionString"] as? String,
+            let bundleVersion = info["CFBundleVersion"] as? String
+        else {
+            fatalError()
+        }
+        return applicationSupportDirectory.appendingPathComponent(bundleID + "\(bundleShortVersion).\(bundleVersion)" + ".sqlite3")
     }()
     
     // Creates a new Core Data stack and returns a managed object context associated with a private queue.
