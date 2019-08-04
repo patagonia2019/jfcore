@@ -83,7 +83,9 @@ public class Analytics : NSObject {
         guard let errorDictionary = errorDictionary else {
             return parameters
         }
+        #if DEBUG
         print("[")
+        #endif
         for (k,v) in errorDictionary {
             let indexKey = k.index(k.startIndex,
                                    offsetBy: min(Constants.maxLength, k.count))
@@ -93,15 +95,20 @@ public class Analytics : NSObject {
                                               offsetBy: min(Constants.maxLength, string.count))
                 let value = string[..<indexValue]
                 parameters[key] = value as AnyObject
+                #if DEBUG
                 print("\(key) = \(value)")
+                #endif
             }
             else {
+                #if DEBUG
                 print("\(key) = \(v)")
+                #endif
                 parameters[key] = v
             }
-            print("\n")
         }
+        #if DEBUG
         print("]")
+        #endif
         return parameters
     }
 }
