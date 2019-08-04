@@ -67,6 +67,7 @@ public class Analytics : NSObject {
                 dict[k] = v
             }
         }
+        dict[Constants.field.function] = function as AnyObject
         instance.logEvent(event: Constants.event.normal, parameters:dict)
     }
     
