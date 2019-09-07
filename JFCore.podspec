@@ -26,12 +26,18 @@ JFCore contains Accessiblity, Location, Error, Analytics and CoreDataManager cla
   s.author           = { 'Javier Fuchs' => 'mobilepatagonia@gmail.com' }
   s.source = { :git => "https://github.com/southfox/jfcore.git", :tag => s.version.to_s }
 
-  s.ios.deployment_target = '12.0'
+  s.subspec 'new' do |new|
+    new.ios.deployment_target = '12.0'
+    new.ios.source_files = 'JFCore/Classes/**/*.swift'
+  end
+  s.subspec 'old' do |old|
+    old.ios.deployment_target = '9.0'
+    old.ios.source_files = 'JFCore/Classes/**/*.swift'
+  end
   s.osx.deployment_target = '10.14'
   s.tvos.deployment_target = '12.0'
   s.watchos.deployment_target = '5.2'
 
-  s.ios.source_files = 'JFCore/Classes/**/*.swift'
   s.osx.source_files = 'JFCore/Classes/**/*.swift'
   s.tvos.source_files = 'JFCore/Classes/**/*.swift'
   s.watchos.source_files = 'JFCore/Classes/all/**/*.swift'

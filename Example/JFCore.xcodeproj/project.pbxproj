@@ -36,7 +36,8 @@
 		98A63D2022BAC59100CABEBA /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 98A63D0322BAC58C00CABEBA /* Watch.app */; };
 		98B32EAE22BAC91100460F30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98B32EAC22BAC91100460F30 /* Main.storyboard */; };
 		A3670F4FC7546D46250EDFEA /* Pods_tvos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0A1AB480F346CEF1E03CFC /* Pods_tvos.framework */; };
-		AB671DA8044E6450246573AA /* Pods_JFCore_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55E9B19A4B8936A416FA7DF /* Pods_JFCore_Example.framework */; };
+		AB671DA8044E6450246573AA /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		BEDFC9E3150949E4F3C72FA3 /* Pods_JFCore_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77E42D3A27BD19FDBFE904A /* Pods_JFCore_Example.framework */; };
 		F586AAADC76EE4C059A2E4D9 /* Pods_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6064425748C28D7CE1B30F68 /* Pods_Watch_Extension.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		29918DB805A7DCBC5F1A12A2 /* Pods-Watch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		30FD4387C9BD8C052FC99001 /* Pods_macos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33ABF75CF6485BDE3E3BC06D /* Pods-tvos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvos.release.xcconfig"; path = "Pods/Target Support Files/Pods-tvos/Pods-tvos.release.xcconfig"; sourceTree = "<group>"; };
+		483A428C6BDC8938D25721A0 /* Pods-JFCore_ExampleOld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFCore_ExampleOld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JFCore_ExampleOld/Pods-JFCore_ExampleOld.debug.xcconfig"; sourceTree = "<group>"; };
 		49B6B7156F0B3AF33CD022BD /* Pods_JFCore_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JFCore_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EBA3B5B824E457B2EF1585 /* Pods-JFCore_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFCore_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		589EBAF424B6CC39EE35F455 /* Pods-JFCore_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFCore_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFCore_Tests/Pods-JFCore_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,9 +138,11 @@
 		98B32EAD22BAC91100460F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		98B32EB122BAC91200460F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6FC65212679197371498D1F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B66F82C3C4C229C8612B4D70 /* Pods-JFCore_ExampleOld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFCore_ExampleOld.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFCore_ExampleOld/Pods-JFCore_ExampleOld.release.xcconfig"; sourceTree = "<group>"; };
 		BF0A1AB480F346CEF1E03CFC /* Pods_tvos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tvos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C55E9B19A4B8936A416FA7DF /* Pods_JFCore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JFCore_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C179FE408529E0D8FCAF3159 /* Pods_JFCore_ExampleOld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JFCore_ExampleOld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C714B4FA53160D5202E558CE /* Pods-tvos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tvos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tvos/Pods-tvos.debug.xcconfig"; sourceTree = "<group>"; };
+		D77E42D3A27BD19FDBFE904A /* Pods_JFCore_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JFCore_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6FE43428608B39F73D8B010 /* Pods-macos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos.release.xcconfig"; path = "Pods/Target Support Files/Pods-macos/Pods-macos.release.xcconfig"; sourceTree = "<group>"; };
 		FB45C43619A66CF395B07C7D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,7 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB671DA8044E6450246573AA /* Pods_JFCore_Example.framework in Frameworks */,
+				AB671DA8044E6450246573AA /* BuildFile in Frameworks */,
+				BEDFC9E3150949E4F3C72FA3 /* Pods_JFCore_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +289,8 @@
 				33ABF75CF6485BDE3E3BC06D /* Pods-tvos.release.xcconfig */,
 				0A6D59CCADED6A811694E57D /* Pods-macos.debug.xcconfig */,
 				E6FE43428608B39F73D8B010 /* Pods-macos.release.xcconfig */,
+				483A428C6BDC8938D25721A0 /* Pods-JFCore_ExampleOld.debug.xcconfig */,
+				B66F82C3C4C229C8612B4D70 /* Pods-JFCore_ExampleOld.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -348,11 +355,12 @@
 		CDA6DD1F03C8BE55EFD87965 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C55E9B19A4B8936A416FA7DF /* Pods_JFCore_Example.framework */,
 				49B6B7156F0B3AF33CD022BD /* Pods_JFCore_Tests.framework */,
 				6064425748C28D7CE1B30F68 /* Pods_Watch_Extension.framework */,
 				BF0A1AB480F346CEF1E03CFC /* Pods_tvos.framework */,
 				30FD4387C9BD8C052FC99001 /* Pods_macos.framework */,
+				C179FE408529E0D8FCAF3159 /* Pods_JFCore_ExampleOld.framework */,
+				D77E42D3A27BD19FDBFE904A /* Pods_JFCore_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -632,7 +640,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JFCore-iOS/JFCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JFCore-old/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -648,15 +656,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-macos/Pods-macos-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JFCore-macOS/JFCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JFCore.root-macOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
@@ -670,15 +674,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-tvos/Pods-tvos-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JFCore-tvOS/JFCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JFCore.root-tvOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
@@ -732,15 +732,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JFCore-watchOS/JFCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JFCore.root-watchOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
@@ -952,7 +948,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1001,7 +997,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1017,7 +1013,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = /Users/fox/patagonia2019/jfcore/Example/JFCore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1033,7 +1029,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = /Users/fox/patagonia2019/jfcore/Example/JFCore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

@@ -1,13 +1,22 @@
 use_frameworks!
 
-target 'JFCore_Example' do
+def podsNew
   platform :ios, '12.0'
-  pod 'JFCore', :path => '../'
+  pod 'JFCore/new', :path => '../'
+end
 
+def podsOld
+  platform :ios, '9.0'
+  pod 'JFCore/old', :path => '../'
+end
+
+target 'JFCore_Example' do
+#  podsNew
+  podsOld
   target 'JFCore_Tests' do
     inherit! :search_paths
   end
-
+  
 end
 
 target 'Watch Extension' do
