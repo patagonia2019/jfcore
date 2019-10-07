@@ -21,11 +21,9 @@ public class CoreDataManager {
          This property is not optional. It is a fatal error for the application
          not to be able to find and load its model.
          */
-        guard let bundleName = Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String else {
-            return nil
-        }
+        guard let bundleID = Bundle.main.bundleIdentifier else { fatalError() }
 
-        guard let modelURL = Bundle.main.url(forResource: bundleName, withExtension: JFCore.Constants.CoreData.extensionFile) else {
+        guard let modelURL = Bundle.main.url(forResource: bundleID, withExtension: JFCore.Constants.CoreData.extensionFile) else {
             return nil
         }
         

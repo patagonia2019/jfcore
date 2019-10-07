@@ -111,7 +111,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		68A5BB5E4B8FAD3595A8853A /* Pods-Watch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		7B34A04FE66CB75594CBBD51 /* Pods-JFCore_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JFCore_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JFCore_Example/Pods-JFCore_Example.release.xcconfig"; sourceTree = "<group>"; };
-		9283C408313925949D287B19 /* JFCore.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JFCore.podspec; path = ../JFCore.podspec; sourceTree = "<group>"; };
+		9283C408313925949D287B19 /* JFCore.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JFCore.podspec; path = ../JFCore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		95138BEF1D73D6EB002808B1 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9866D39A22BFB0F20052C03E /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		9898A2A322BCF57400474B66 /* macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -648,15 +648,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-macos/Pods-macos-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JFCore-macOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
@@ -670,15 +666,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-tvos/Pods-tvos-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JFCore-tvOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
@@ -732,15 +724,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/JFCore-watchOS/JFCore.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JFCore.framework",
 			);
